@@ -133,7 +133,7 @@ const Dashboard = () => {
 
   const allianceAPRs = useCalculateAllianceAprs({ address })
 
-  const undelegations = useMemo(() => undelegationData?.undelegations || [],
+  const undelegations = useMemo(() => undelegationData?.allUndelegations || [],
     [undelegationData])
   const [currentTab, setCurrentTab] = useRecoilState(tabState)
 
