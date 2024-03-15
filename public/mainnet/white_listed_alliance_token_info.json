@@ -46,5 +46,17 @@
     "denom": "ibc/40C29143BF4153B365089E40E437B7AA819672646C45BB0A5F1E10915A0B6708",
     "native": true,
     "color": "#3273F6"
+  },
+  {
+    "chainId": "migaloo-1",
+    "token_address": "ibc/BEFB9AB13AB43157A0AF6214AD4B1F565AC0CA0C1760B8337BE7B9E2996F7752",
+    "symbol": "ampOSMO",
+    "name": "ampOSMO",
+    "decimals": 6,
+    "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/amposmo.png",
+    "tags": ["native"],
+    "denom": "ibc/BEFB9AB13AB43157A0AF6214AD4B1F565AC0CA0C1760B8337BE7B9E2996F7752",
+    "native": true,
+    "color": "purple"
   }
 ]

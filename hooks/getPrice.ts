@@ -31,6 +31,13 @@ const getLCDClient = () => new LCDClient({
     gasPrices: { uluna: 0.015 },
     prefix: 'terra',
   },
+  'osmosis-1': {
+    lcd: 'https://osmosis-api.polkachu.com/',
+    chainID: 'osmosis-1',
+    gasAdjustment: 1.75,
+    gasPrices: { uosmo: 0.0025 },
+    prefix: 'osmo',
+  },
 })
 
 const getPriceFromPool = ({ denom, decimals, contract, base, basedOn }: PoolInfo,
@@ -94,10 +101,10 @@ export const getTokenPrice = async (): Promise<[TokenPrice, number]> => {
   // Group by base tokens to make sure we get base price before other tokens
   const baseTokens = tokens.filter((token) => token.base);
   const otherTokens = tokens.filter((token) => !token.base);
-
+  console.log(otherTokens, baseTokens)
   const basePrice = await getPrice(baseTokens);
   const otherPrice = await getPrice(otherTokens, basePrice);
-
+  console.log(basePrice, otherPrice)
   return [{ ...basePrice,
     ...otherPrice }, new Date().getTime()]
 }

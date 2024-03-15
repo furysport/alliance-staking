@@ -1,6 +1,6 @@
 import { Token } from 'components/Pages/AssetOverview';
 
-export const getColorByTokenSymbol = (symbol: string) : string => {
+export const getColorByTokenSymbol = (symbol: string): string => {
   switch (symbol) {
     case Token.WHALE:
       return '#13B55A'
@@ -18,6 +18,8 @@ export const getColorByTokenSymbol = (symbol: string) : string => {
       return 'red'
     case Token.wBTC:
       return 'darkorange'
+    case Token.ampOSMO:
+      return 'purple'
     default:
       return null
   }
