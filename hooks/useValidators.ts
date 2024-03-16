@@ -175,7 +175,7 @@ const useValidators = ({ address }): UseValidatorsResult => {
       stakedAmpLuna: lunaLSTData?.totalAmpLunaAmount || 0,
       stakedBLuna: lunaLSTData?.totalBLunaAmount || 0,
       stakedWBtc: stakedWBtc?.totalWBtcAmount || 0,
-      stakedAmpOSMO: 100 || 0,
+      stakedAmpOSMO: stakedAmpOSMO?.totalampOsmoAmount || 0,
     },
     isFetching,
   }
