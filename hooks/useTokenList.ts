@@ -31,9 +31,7 @@ export const useTokenList = () => {
       refetchOnMount: false,
     },
   )
-  let changedTokenList = tokenInfoList
 
-
-  return { tokens: changedTokenList,
+  return { tokens: tokenInfoList,
     isLoading }
 };

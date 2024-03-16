@@ -84,6 +84,7 @@ type UseValidatorsResult = {
     stakedAmpLuna: number
     stakedBLuna: number
     stakedWBtc: number
+    stakedAmpOSMO: number
   }
   isFetching: boolean
 }
@@ -96,6 +97,17 @@ const getStakedWBtc = async ({ validatorData }) => {
   })
   return { totalWBtcAmount }
 }
+
+const getStakedAmpOsmo = async ({ validatorData }) => {
+  const ampOsmo = allianceTokens.find((token) => token.symbol === Token.ampOSMO)
+  let totalampOsmoAmount = 0
+  validatorData.validators.forEach((v) => {
+    const ampOsmoAmount = v.total_staked.find((token) => token.denom === ampOsmo.denom)?.amount || 0
+    totalampOsmoAmount += convertMicroDenomToDenom(ampOsmoAmount, ampOsmo.decimals)
+  })
+  return { totalampOsmoAmount }
+}
+
 const getStakedLSTLunaAmounts = async ({ validatorData }) => {
   const bLunaDenom = allianceTokens.find((token) => token.symbol === 'bLUNA').denom
   const ampLunaDenom = allianceTokens.find((token) => token.symbol === 'ampLUNA').denom
@@ -149,6 +161,12 @@ const useValidators = ({ address }): UseValidatorsResult => {
     enabled: Boolean(validatorData),
   })
 
+  const { data: stakedAmpOSMO } = useQuery({
+    queryKey: ['stakedAmpOsmo'],
+    queryFn: () => getStakedAmpOsmo({ validatorData }),
+    enabled: Boolean(validatorData),
+  })
+
   return {
     data: {
       validators: validatorData?.validators || [],
@@ -157,6 +175,7 @@ const useValidators = ({ address }): UseValidatorsResult => {
       stakedAmpLuna: lunaLSTData?.totalAmpLunaAmount || 0,
       stakedBLuna: lunaLSTData?.totalBLunaAmount || 0,
       stakedWBtc: stakedWBtc?.totalWBtcAmount || 0,
+      stakedAmpOSMO: stakedAmpOSMO?.totalampOsmoAmount || 0,
     },
     isFetching,
   }

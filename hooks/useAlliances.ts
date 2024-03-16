@@ -18,7 +18,6 @@ export interface Alliance {
 }
 
 const fetchAlliances = async (client: LCDClient, priceList) => {
-
   const allianceAssets: AllianceAsset[] = (
     await client.alliance.alliances(MIGALOO_CHAIN_ID)
   ).alliances;
