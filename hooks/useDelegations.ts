@@ -47,15 +47,10 @@ export const getDelegation = async (
         }));
   }));
 
-  const allianceDelegation = await client?.alliance.alliancesDelegation(delegatorAddress)
-  const nativeStake = await client.staking.delegations(delegatorAddress);
-  const [nativeStakeResponse, allianceStakeResponse] = await Promise.all([
-    nativeStake[0],
-    allianceDelegation.delegations,
-  ])
-
+  const allianceDelegation = (await client?.alliance.alliancesDelegation(delegatorAddress)).delegations
+  const nativeStake = (await client.staking.delegations(delegatorAddress))[0];
   const delegations = [
-    ...nativeStakeResponse.map((item: any) => ({
+    ...nativeStake.map((item: any) => ({
       type: 'native',
       delegation: {
         delegator_address: item.delegator_address || 0,
@@ -67,13 +62,12 @@ export const getDelegation = async (
         amount: `${String(item.balance.amount)}` || 0,
       },
     })),
-    ...allianceStakeResponse.map((item: any) => ({
+    ...allianceDelegation.map((item: any) => ({
       type: TabType.alliance,
       delegation: item.delegation,
       balance: item.balance,
     })),
   ]
-
   // This needs to be reworked such that we are working on a list of delegations from both modules
   return getRewards(delegations).
     then((data) => data?.map((item) => {
@@ -88,7 +82,6 @@ export const getDelegation = async (
           denom: token.denom,
         }
       })
-
       // Delegation amount
       const amount = delegatedToken
         ? num(item.balance?.amount).

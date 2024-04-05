@@ -67,64 +67,42 @@ const getUndelegations = async (
   priceList: any,
   delegatorAddress: string,
 ): Promise<any> => {
-  // This is the search params for gathering undelegations from alliance module
-  const allianceParams = new URLSearchParams();
-  // This is the search params for gathering undelegations from native module
-  const nativeParams = new URLSearchParams();
-  // For alliance we add their undelegate message action
-  allianceParams.append('events',
-    'message.action=\'/alliance.alliance.MsgUndelegate\'');
-  // And same for native
-  nativeParams.append('events',
-    'message.action=\'/cosmos.staking.v1beta1.MsgUndelegate\'');
-  // Next 3 params we can just add to both they are the same
-  allianceParams.append('events',
-    `coin_received.receiver='${delegatorAddress}'`);
-  allianceParams.append('pagination.limit', '100');
-  allianceParams.append('order_by', '2');
-
-  nativeParams.append('events', `coin_received.receiver='${delegatorAddress}'`);
-  nativeParams.append('pagination.limit', '100');
-  nativeParams.append('order_by', '2');
-  // Make the request for alliance undelegations
-  const res = (await client?.alliance.
-    getReqFromAddress(delegatorAddress).
-    get('/cosmos/tx/v1beta1/txs', allianceParams)) as RawTxData;
-  // Map the response to our undelegation object
-  const undelegations: Undelegation[] = res.tx_responses.
-    map((res) => res.tx.body.messages[0]).
-    map((undelegation) => {
-      const token = tokens.find((t) => t.denom === undelegation.amount.denom);
-      const amount = convertMicroDenomToDenom(undelegation.amount.amount,
-        token.decimals);
-      const dollarValue = priceList[token.name] * amount;
-      return {
-        validatorAddress: undelegation.validator_address,
-        delegatorAddress: undelegation.delegator_address,
-        amount,
-        dollarValue,
-        symbol: token.symbol,
-      };
-    });
-  // Do the same for native undelegations
-  const nativeRes = (await client?.staking.
-    getReqFromAddress(delegatorAddress).
-    get('/cosmos/tx/v1beta1/txs', nativeParams)) as RawTxData;
-  const nativeUndelegations: Undelegation[] = nativeRes.tx_responses.
-    map((res) => res.tx.body.messages[0]).
-    map((undelegation) => {
-      const token = tokens.find((t) => t.denom === undelegation.amount.denom);
-      const amount = convertMicroDenomToDenom(undelegation.amount.amount,
-        token.decimals);
-      const dollarValue = priceList[token.name] * amount;
-      return {
-        validatorAddress: undelegation.validator_address,
-        delegatorAddress: undelegation.delegator_address,
-        amount,
-        dollarValue,
-        symbol: token.symbol,
-      };
-    });
+  let undelegations:Undelegation[] = []
+  for (const token of tokens) {
+    let url: string = 'terra/alliances/unbondings/'
+    url += `/${encodeURIComponent(encodeURIComponent(token.token_address))}/${delegatorAddress}`;
+    const resAlliance: any = await client.alliance.getReqFromAddress(delegatorAddress).get(url)
+    if (resAlliance.unbondings.length > 0) {
+      resAlliance.unbondings.forEach((undelegation) => {
+        console.log(undelegation)
+        const amount = convertMicroDenomToDenom(undelegation.amount,
+          token.decimals);
+        const dollarValue = priceList[token.name] * amount;
+        undelegations.push({
+          validatorAddress: undelegation.validator_address,
+          delegatorAddress: delegatorAddress,
+          amount,
+          dollarValue,
+          symbol: token.symbol,
+        });
+      }); 
+    }
+  }
+  const stakingToken = "Whale"
+  const nativeRes = await client?.staking.unbondingDelegations(delegatorAddress);
+  const nativeUndelegations = nativeRes[0].map((undelegation) => {
+    const undelegationJson = undelegation.toProto();
+    const amount = convertMicroDenomToDenom(undelegationJson.entries[0].balance,
+      6);
+    const dollarValue = priceList[stakingToken] * amount;
+    return {
+      validatorAddress: undelegation.validator_address,
+      delegatorAddress: undelegation.delegator_address,
+      amount,
+      dollarValue,
+      symbol: "WHALE",
+    };
+  });
   // And finally merge them up and return
   const allUndelegations = undelegations.concat(nativeUndelegations);
 
