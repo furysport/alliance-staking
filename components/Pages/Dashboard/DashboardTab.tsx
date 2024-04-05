@@ -16,7 +16,7 @@ import tokens from 'public/mainnet/tokens.json';
 import { useRecoilValue } from 'recoil';
 import { chainState } from 'state/chainState';
 
-const dashboardTokenSymbols = [Token.WHALE, Token.mUSDC, Token.ampLUNA, Token.bLUNA, Token.ASH, Token['USDC-WHALE-LP'], Token['WHALE-wBTC-LP'], Token.wBTC, Token.ampOSMO]
+const dashboardTokenSymbols = [Token.WHALE, Token.mUSDC, Token.ampLUNA, Token.bLUNA, Token.ASH, Token['USDC-WHALE-LP'], Token['WHALE-wBTC-LP'], Token.wBTC, Token.ampOSMO, Token.bOSMO]
 export const DashboardTab = ({ priceList }) => {
   const { walletChainName } = useRecoilValue(chainState)
   const { address } = useChain(walletChainName)
@@ -26,7 +26,7 @@ export const DashboardTab = ({ priceList }) => {
 
   const { vtRewardShares, totalStakedBalances } = useAssetsData()
 
-  const { data: { stakedAmpLuna, stakedBLuna, stakedWhale, stakedWBtc, stakedAmpOSMO } } = useValidators({ address })
+  const { data: { stakedAmpLuna, stakedBLuna, stakedWhale, stakedWBtc, stakedAmpOSMO, stakedbOsmo } } = useValidators({ address })
   const [aprs, setAprs] = useState<Apr[]>([])
   const allianceAPRs = useCalculateAllianceAprs({ address })
   const otherAprs = useCalculateAprs()
@@ -46,7 +46,7 @@ export const DashboardTab = ({ priceList }) => {
   }, [vtRewardShares, allianceAPRs, otherAprs])
 
   useEffect(() => {
-    if (!totalStakedBalances || !stakedAmpLuna || !stakedBLuna || !stakedWhale || !stakedWBtc || !stakedAmpOSMO || !priceList || !lpTokenPrices || aprs.length === 0) {
+    if (!totalStakedBalances || !stakedAmpLuna || !stakedBLuna || !stakedWhale || !stakedWBtc || !stakedAmpOSMO || !stakedbOsmo || !priceList || !lpTokenPrices || aprs.length === 0) {
       return
     }
     const dashboardData = dashboardTokenSymbols.map((symbol) => {
@@ -68,6 +68,9 @@ export const DashboardTab = ({ priceList }) => {
           break
         case Token.ampOSMO:
           totalAmount = stakedAmpOSMO
+          break
+        case Token.bOSMO:
+          totalAmount = stakedbOsmo
           break
         default:
           totalAmount = totalStakedBalance?.totalAmount || 0
@@ -93,7 +96,7 @@ export const DashboardTab = ({ priceList }) => {
     })
     setDashboardData(dashboardData)
     setInitialized(true)
-  }, [vtRewardShares, totalStakedBalances, stakedAmpLuna, stakedBLuna, stakedWhale, stakedWBtc, stakedAmpOSMO, priceList, lpTokenPrices, aprs])
+  }, [vtRewardShares, totalStakedBalances, stakedAmpLuna, stakedBLuna, stakedWhale, stakedWBtc, stakedAmpOSMO, stakedbOsmo, priceList, lpTokenPrices, aprs])
 
   return <VStack
     pt={12}

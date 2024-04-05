@@ -85,6 +85,7 @@ type UseValidatorsResult = {
     stakedBLuna: number
     stakedWBtc: number
     stakedAmpOSMO: number
+    stakedbOsmo: number
   }
   isFetching: boolean
 }
@@ -106,6 +107,16 @@ const getStakedAmpOsmo = async ({ validatorData }) => {
     totalampOsmoAmount += convertMicroDenomToDenom(ampOsmoAmount, ampOsmo.decimals)
   })
   return { totalampOsmoAmount }
+}
+
+const getStakedbOsmo = async ({ validatorData }) => {
+  const bOsmo = allianceTokens.find((token) => token.symbol === Token.bOSMO)
+  let totalbOsmoAmount = 0
+  validatorData.validators.forEach((v) => {
+    const bosmoAmount = v.total_staked.find((token) => token.denom === bOsmo.denom)?.amount || 0
+    totalbOsmoAmount += convertMicroDenomToDenom(bosmoAmount, bOsmo.decimals)
+  })
+  return { totalbOsmoAmount }
 }
 
 const getStakedLSTLunaAmounts = async ({ validatorData }) => {
@@ -166,7 +177,11 @@ const useValidators = ({ address }): UseValidatorsResult => {
     queryFn: () => getStakedAmpOsmo({ validatorData }),
     enabled: Boolean(validatorData),
   })
-
+  const { data: stakedbOsmo } = useQuery({
+    queryKey: ['stakedbOsmo'],
+    queryFn: () => getStakedbOsmo({ validatorData }),
+    enabled: Boolean(validatorData),
+  })
   return {
     data: {
       validators: validatorData?.validators || [],
@@ -176,6 +191,7 @@ const useValidators = ({ address }): UseValidatorsResult => {
       stakedBLuna: lunaLSTData?.totalBLunaAmount || 0,
       stakedWBtc: stakedWBtc?.totalWBtcAmount || 0,
       stakedAmpOSMO: stakedAmpOSMO?.totalampOsmoAmount || 0,
+      stakedbOsmo: stakedbOsmo?.totalbOsmoAmount || 0,
     },
     isFetching,
   }
