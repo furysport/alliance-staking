@@ -18,7 +18,9 @@ export const getColorByTokenSymbol = (symbol: string): string => {
       return 'red'
     case Token.wBTC:
       return 'darkorange'
-    case Token.ampOSMO || Token.bOSMO:
+    case Token.ampOSMO:
+      return 'purple'
+    case Token.bOSMO:
       return 'purple'
     default:
       return null
