@@ -187,7 +187,7 @@ const AssetTable = ({ dashboardData, initialized }) => {
           {headerGroup.headers.map((header, index) => (
             <Box
               key={header.id}
-              minW={index === 0 ? '15px' : index === 1 ? '180px' : index === 2 ? '145px' : index === 3 ? '145px' : index === 4 ? '180px' : index === 5 ? '150px' :index === 6 ? '150px' : 'unset'}
+              minW={index === 0 ? '15px' : index === 1 ? '180px' : index === 2 ? '145px' : index === 3 ? '145px' : index === 4 ? '180px' : index === 5 ? '150px' : index === 6 ? '150px' : 'unset'}
               cursor={header.column.getCanSort() ? 'pointer' : 'default'}
               onClick={header.column.getToggleSortingHandler()}
             >
