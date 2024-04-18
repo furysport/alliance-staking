@@ -239,8 +239,8 @@ const Dashboard = () => {
             backgroundColor="rgba(0, 0, 0, 0.5)"
             mt={0}>
             <Tab>Dashboard</Tab>
-            <Tab>Alliance</Tab>
-            <Tab>Ecosystem</Tab>
+            <Tab>Portfolio</Tab>
+            <Tab>ReStaking</Tab>
             <Tab>Liquidity</Tab>
           </TabList>
           <Header/>

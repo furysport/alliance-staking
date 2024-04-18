@@ -18,7 +18,7 @@ export const AllianceTab = ({
   alignItems={'flex-start'}
   spacing={6}>
   <Text as="h1" fontSize="37" fontWeight="700" >
-            Alliance
+            Portfolio
   </Text>
   <HStack width="full" paddingY={5} spacing={10}>
     <CardComponent

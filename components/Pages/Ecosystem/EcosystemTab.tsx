@@ -26,7 +26,7 @@ export const EcosystemTab = ({
       <Text as="h1"
         fontSize="37"
         fontWeight="700">
-                Ecosystem
+                ReStaking
       </Text>
       <HStack pr={2}>
         <CustomButton isTransparent={true}
