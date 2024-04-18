@@ -153,7 +153,7 @@
     "denom": "factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
     "decimals": 6,
     "tags": ["native"],
-    "tabType": "ecosystem",
+    "tabType": "restaking",
     "logoURI": "https://raw.githubusercontent.com/White-Whale-Defi-Platform/white-whale-frontend/main/public/logos/gASH.png",
     "native": true,
     "color": "blue"

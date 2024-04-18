@@ -166,12 +166,12 @@ const AssetTable = ({ dashboardData, initialized }) => {
         action: true,
         status: false,
       },
+      rowSelection: { enabled: false },
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
   })
 
   return (
