@@ -22,6 +22,12 @@ export const getColorByTokenSymbol = (symbol: string): string => {
       return 'purple'
     case Token.bOSMO:
       return 'purple'
+    case Token.OPHIR:
+      return 'lightgreen'
+    case Token.MOAR:
+      return 'lightgreen'
+    case Token.gASH:
+      return 'blue'
     default:
       return null
   }

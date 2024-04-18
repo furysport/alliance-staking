@@ -17,7 +17,7 @@ import tokens from 'public/mainnet/tokens.json';
 import { useRecoilValue } from 'recoil';
 import { chainState } from 'state/chainState';
 
-const dashboardTokenSymbols = [Token.WHALE, Token.mUSDC, Token.ampLUNA, Token.bLUNA, Token.ASH, Token['USDC-WHALE-LP'], Token['WHALE-wBTC-LP'], Token.wBTC, Token.ampOSMO, Token.bOSMO]
+const dashboardTokenSymbols = [Token.WHALE, Token.mUSDC, Token.ampLUNA, Token.bLUNA, Token.ASH, Token['USDC-WHALE-LP'], Token['WHALE-wBTC-LP'], Token.wBTC, Token.ampOSMO, Token.bOSMO, Token.OPHIR, Token.MOAR, Token.gASH]
 export const DashboardTab = ({ priceList }) => {
   const { walletChainName } = useRecoilValue(chainState)
   const { address } = useChain(walletChainName)

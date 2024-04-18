@@ -24,6 +24,9 @@ export enum Token {
   'WHALE-wBTC-LP' = 'WHALE-wBTC-LP',
   ampOSMO = 'ampOSMO',
   bOSMO = 'bOSMO',
+  OPHIR = 'OPHIR',
+  MOAR = 'MOAR',
+  gASH = 'gASH',
 }
 
 export enum TokenType {

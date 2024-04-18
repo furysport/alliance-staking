@@ -118,5 +118,44 @@
     "denom": "ibc/EC48B819FC1D955ED1708A8E8E230B37217CC6D953448D3B4BCCF5B29BD1FCF9",
     "native": true,
     "color": "purple"
+  },
+  {
+    "chainId": "migaloo-1",
+    "token_address": "ibc/DAB7EEB14B61CA588F013729604B01017A5FE0E860E1CCBAA5A1A5D9763737D6",
+    "symbol": "MOAR",
+    "name": "MOAR",
+    "decimals": 6,
+    "logoURI": "https://raw.githubusercontent.com/terra-money/station-assets/master/img/coins/moar.png",
+    "tags": ["native"],
+    "denom": "ibc/DAB7EEB14B61CA588F013729604B01017A5FE0E860E1CCBAA5A1A5D9763737D6",
+    "native": true,
+    "color": "#7CFB7D"
+  },
+  {
+    "chainId": "migaloo-1",
+    "token_address": "factory/migaloo1t862qdu9mj5hr3j727247acypym3ej47axu22rrapm4tqlcpuseqltxwq5/ophir",
+    "symbol": "OPHIR",
+    "name": "OPHIR",
+    "decimals": 6,
+    "logoURI": "https://raw.githubusercontent.com/terra-money/station-assets/master/img/coins/ophir.png",
+    "tags": ["native"],
+    "denom": "factory/migaloo1t862qdu9mj5hr3j727247acypym3ej47axu22rrapm4tqlcpuseqltxwq5/ophir",
+    "native": true,
+    "color": "#7CFB7D"
+  },
+  {
+    "name": "gASH",
+    "symbol": "gASH",
+    "token_address":"factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
+    "contract": "migaloo1huj5syg78rm3nuslzf9py73ccegcth2lkfpf5pvaq6q68pakldmsahxmfl",
+    "chainId": "migaloo-1",
+    "basedOn": "Whale",
+    "denom": "factory/migaloo1r9x8fz4alekzr78k42rpmr9unpa7egsldpqeynmwl2nfvzexue9sn8l5rg/gash",
+    "decimals": 6,
+    "tags": ["native"],
+    "tabType": "ecosystem",
+    "logoURI": "https://raw.githubusercontent.com/White-Whale-Defi-Platform/white-whale-frontend/main/public/logos/gASH.png",
+    "native": true,
+    "color": "#7CFB7D"
   }
 ]

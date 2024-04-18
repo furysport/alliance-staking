@@ -45,7 +45,7 @@ export const DashboardPieChart = ({ dashboardData }) => {
       spacing={35}
       width={'full'}
     >
-      <VStack alignItems="start" alignSelf="center" w={240}>
+      <VStack alignItems="start" alignSelf="center" w={240} paddingTop={100}>
         {data?.length > 0 && <Text mt={-100}
           mb={19}
           as="h2"
