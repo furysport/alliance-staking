@@ -3,17 +3,17 @@ import { num } from 'libs/num'
 import tokens from 'public/mainnet/tokens.json'
 
 type PoolInfo = {
-  denom: string;
-  decimals: number;
-  contract: string;
-  base?: boolean;
-  basedOn?: string;
-  chainId: string;
-  name: string;
+  denom: string
+  decimals: number
+  contract: string
+  base?: boolean
+  basedOn?: string
+  chainId: string
+  name: string
 }
 
 type TokenPrice = {
-  [key: string]: number;
+  [key: string]: number
 }
 
 const getLCDClient = () => new LCDClient({
@@ -57,21 +57,21 @@ const getPriceFromPool = async ({
   return client.wasm.
     contractQuery(contract, { pool: {} }).
     then((response: any) => {
-      const [asset1, asset2] = response?.assets || [];
+      const [asset1, asset2] = response?.assets || []
       const asset1Denom =
         asset1.info.native_token?.denom || asset1.info.token?.contract_addr
       const token1 = tokens.find((token) => token.denom === (asset1.info.native_token?.denom ?? asset1.info.token?.contract_addr))
       const token2 = tokens.find((token) => token.denom === (asset2.info.native_token?.denom ?? asset2.info.token?.contract_addr))
-      const isAB = asset1Denom === 'uwhale' || asset1Denom === 'uluna' || asset1Denom === 'uosmo'
+      const isAB = tokens.some(t => t.base && t.denom === asset1Denom)
+
       if (!basePrice || !basedOn) {
         return 0
       }
-
       if (isAB) {
         return num(asset1.amount / (10 ** (token1?.decimals || 6))).
           div(asset2.amount / (10 ** (token2?.decimals || 6))).
           times(basePrice[basedOn]).
-          dp((token2?.decimals || 6)).
+          dp((10)).
           toNumber()
       } else {
         return num(asset2.amount / (10 ** (token2?.decimals || 6))).
@@ -86,10 +86,10 @@ const getPriceFromPool = async ({
 const getPrice = (tokens: PoolInfo[], basePrice?: TokenPrice) => {
   const promises = tokens.map((token) => getPriceFromPool(token, basePrice))
   return Promise.all(promises).then((prices) => {
-    const tokenPrice: TokenPrice = {};
+    const tokenPrice: TokenPrice = {}
     tokens.forEach((token, index) => {
       tokenPrice[token.name] = prices[index]
-    });
+    })
     return tokenPrice
   })
 }
@@ -98,7 +98,7 @@ export const getTokenPrice = async (): Promise<[TokenPrice, number]> => {
   // Group by base tokens to make sure we get base price before other tokens
   const baseTokens = tokens.filter((token) => token.base)
   const otherTokens = tokens.filter((token) => !token.base)
-  const basePrice = await getPrice(baseTokens);
+  const basePrice = await getPrice(baseTokens)
   const otherPrice = await getPrice(otherTokens, basePrice)
   return [{ ...basePrice,
     ...otherPrice }, new Date().getTime()]
