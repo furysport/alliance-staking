@@ -27,6 +27,7 @@ export enum Token {
   OPHIR = 'OPHIR',
   MOAR = 'MOAR',
   gASH = 'gASH',
+  RAC = 'RAC',
 }
 
 export enum TokenType {

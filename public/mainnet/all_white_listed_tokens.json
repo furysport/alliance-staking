@@ -157,5 +157,17 @@
     "logoURI": "https://raw.githubusercontent.com/White-Whale-Defi-Platform/white-whale-frontend/main/public/logos/gASH.png",
     "native": true,
     "color": "blue"
+  },
+  {
+    "chainId": "migaloo-1",
+    "token_address": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
+    "symbol": "RAC",
+    "name": "RAC",
+    "decimals": 6,
+    "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rac.svg",
+    "tags": ["native"],
+    "denom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
+    "native": true,
+    "color": "#009076"
   }
 ]

@@ -28,6 +28,8 @@ export const getColorByTokenSymbol = (symbol: string): string => {
       return 'lightgreen'
     case Token.gASH:
       return 'blue'
+    case Token.RAC:
+        return '#009076'
     default:
       return null
   }
