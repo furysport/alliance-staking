@@ -1,38 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Migaloo Staking Frontend
+## Installation
 
-First, run the development server:
+Clone alliance-staking
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  git clone https://github.com/White-Whale-Defi-Platform/alliance-staking.git
+  cd alliance-staking
+  npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run locally
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+  npm run dev
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+    
+## How to add your Token for Restaking
+    1. Add Token to assetlist of the chain registry on migaloo: https://github.com/cosmos/chain-registry/tree/master/migaloo
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+    2. Get Token approved: https://daodao.zone/dao/migaloo1pxuqr7je9h7slchdsgz5ufc3kklrevyfnxmq0dkjru5k6e6mdm2sw23hfz
+    3. Fork this repo.
 
-## Learn More
+    4. Apply changes on the following files:
+         components/Pages/AssetOverview.tsx Add token to Token enum line 16++
 
-To learn more about Next.js, take a look at the following resources:
+         util/getColorByTokenSymbol.ts Add color for Token Line 3++
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+         public/mainnet/all_white_listed_tokens.json Add Token with infos from registry Example RAC:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+            {
+                "chainId": "migaloo-1",
+                "token_address": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
+                "symbol": "RAC",
+                "name": "RAC",
+                "decimals": 6,
+                "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rac.svg",
+                "tags": ["native"],
+                "denom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
+                "native": true,
+                "color": "#009076" // Color on Charts
+            }
 
-## Deploy on Vercel
+        public/mainnet/tokens.json Add Token with infos from registry (Used for Price calculation):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+            {
+                "name": "RAC",
+                "symbol": "RAC",
+                "contract": "migaloo1crsvm4qddplxhag29nd2zyw6k6jzh06hlcctya4ynfvuhhu3yt4q0pn4t3" // SWAP CONTRACT ADDRESS,
+                "chainId": "migaloo-1",
+                "basedOn": "Whale" // paired with this address, 
+                "denom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
+                "decimals": 6,
+                "tabType": "restaking",
+                "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rac.svg"
+            }
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+        public/mainnet/white_listed_ecosystem_token_info.json Add Token with infos from registry: 
+
+            {
+                "chainId": "migaloo-1",
+                "token_address": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
+                "symbol": "RAC",
+                "name": "RAC",
+                "decimals": 6,
+                "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/rac.svg",
+                "tags": ["native"],
+                "denom": "factory/migaloo1eqntnl6tzcj9h86psg4y4h6hh05g2h9nj8e09l/urac",
+                "native": true,
+                "color": "#009076"
+            }
+
+    5. Create pull request on this repo
+
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
