@@ -1,6 +1,6 @@
 import { SigningStargateClient } from '@cosmjs/stargate'
 import { ActionType } from 'components/Pages/Dashboard'
-import { alliance, cosmos } from 'util/alliance_aminos';
+import { alliance, cosmos } from 'migaloojs';
 import { createGasFee } from 'util/createGasFees'
 
 export const claimAllRewards = async (

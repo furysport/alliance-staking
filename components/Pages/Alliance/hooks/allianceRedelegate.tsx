@@ -1,5 +1,5 @@
 import { SigningStargateClient } from '@cosmjs/stargate';
-import { alliance } from 'util/alliance_aminos';
+import { alliance } from 'migaloojs';
 import { createGasFee } from 'util/createGasFees'
 
 export const allianceRedelegate = async (
