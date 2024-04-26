@@ -1,12 +1,13 @@
 import { SigningCosmWasmClient } from '@cosmjs/cosmwasm-stargate/build/signingcosmwasmclient'
-import { coin } from '@cosmjs/stargate'
+import { SigningStargateClient, coin } from '@cosmjs/stargate'
 import file from 'public/mainnet/contract_addresses.json'
 import { createExecuteMessage } from 'util/createExecutionMessage'
 import { isNativeToken } from 'util/isNative'
 import { toBase64 } from 'util/toBase64'
+import { createGasFee } from '../util/createGasFees'
 
 export const delegate = async (
-  client: SigningCosmWasmClient,
+  client: SigningStargateClient,
   address: string,
   amount: string,
   denom: string,
@@ -16,25 +17,36 @@ export const delegate = async (
   }
 
   if (isNativeToken(denom)) {
-    const msg = createExecuteMessage({ senderAddress: address,
+    const msg = createExecuteMessage({
+      senderAddress: address,
       contractAddress: file.alliance_contract,
       message: stakeMessage,
-      funds: [coin(amount, denom)] })
+      funds: [coin(amount, denom)]
+    })
     return await client.signAndBroadcast(
-      address, [msg], 'auto', null,
+      address, [msg], await createGasFee(
+        client, address, [msg],
+      ), null,
     )
   } else {
     const msg =
-        {
-          send: {
-            amount,
-            contract: file.alliance_contract,
-            msg: toBase64(stakeMessage),
-          },
-        }
-
-    return await client.execute(
-      address, denom, msg, 'auto', null,
+    {
+      send: {
+        amount,
+        contract: file.alliance_contract,
+        msg: toBase64(stakeMessage),
+      },
+    }
+    const execMSG = createExecuteMessage({
+      senderAddress: address,
+      contractAddress: file.alliance_contract,
+      message: msg,
+      funds: []
+    })
+    return await client.signAndBroadcast(
+      address, [execMSG], await createGasFee(
+        client, address, [execMSG],
+      ), null,
     )
   }
 }

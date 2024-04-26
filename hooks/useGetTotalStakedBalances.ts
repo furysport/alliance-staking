@@ -31,6 +31,14 @@ export const fetchTotalStakedBalances = async (client: LCDClient) => {
   const res: Response[] = await client.wasm.contractQuery(file.alliance_contract, msg)
   const totalStakedBalances = res.map((info) => {
     const token = tokens.find((token) => token.denom === (info?.asset?.native ?? info?.asset?.cw20))
+    if (!token) {
+      return {
+        denom: (info?.asset?.native ?? info?.asset?.cw20),
+        tokenSymbol: (info?.asset?.native ?? info?.asset?.cw20),
+        name: (info?.asset?.native ?? info?.asset?.cw20),
+        totalAmount: convertMicroDenomToDenom(info?.balance, 6),
+      } as TotalStakedBalance
+    }
     return {
       denom: token.denom,
       name: token.name,

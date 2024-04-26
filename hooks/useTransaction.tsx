@@ -17,7 +17,7 @@ import { isNativeToken } from 'util/isNative';
 export const useTransaction = () => {
   const toast = useToast();
   const { address } = useChain(MIGALOO_CHAIN_NAME)
-  const { signingClient: client } = useClients()
+  const { signingClient: client, allianceSigningClient } = useClients()
   const [txStep, setTxStep] = useState<TxStep>(TxStep.Idle);
   const [delegationAction, setDelegationAction] = useState<ActionType>(ActionType.delegate)
   const [txHash, setTxHash] = useState<string>(null)
@@ -77,15 +77,15 @@ export const useTransaction = () => {
     const adjustedAmount = convertDenomToMicroDenom(data?.amount ?? 0, 6).toString();
     if (data.action === ActionType.delegate) {
       return delegate(
-        client, address, adjustedAmount, data.denom,
+        allianceSigningClient, address, adjustedAmount, data.denom,
       )
     } else if (data.action === ActionType.undelegate) {
       return undelegate(
-        client, address, adjustedAmount, data.denom, isNativeToken(data.denom),
+        allianceSigningClient, address, adjustedAmount, data.denom, isNativeToken(data.denom),
       )
     } else {
       return claimRewards(
-        client, address, data.denom, isNativeToken(data.denom),
+        allianceSigningClient, address, data.denom, isNativeToken(data.denom),
       )
     }
   },

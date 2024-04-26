@@ -31,6 +31,6 @@ export const getColorByTokenSymbol = (symbol: string): string => {
     case Token.RAC:
         return '#009076'
     default:
-      return null
+      return 'grey'
   }
 }

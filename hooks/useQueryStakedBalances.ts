@@ -27,6 +27,15 @@ const getStakedBalances = async (
 
   return stakedInfos.map((info) => {
     const token = tokens?.find((token) => token.denom === (info?.asset?.native ?? info?.asset?.cw20))
+    if (!token) {
+      return {
+        denom: (info?.asset?.native ?? info?.asset?.cw20),
+        tokenSymbol: (info?.asset?.native ?? info?.asset?.cw20),
+        name: (info?.asset?.native ?? info?.asset?.cw20),
+        amount: convertMicroDenomToDenom(info?.balance, 6),
+        isNative: Boolean(info?.asset?.native),
+      }
+    }
     return {
       denom: token.denom,
       tokenSymbol: token.symbol,

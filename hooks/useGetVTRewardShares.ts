@@ -28,6 +28,13 @@ export const fetchVTRewardShares = async (client: LCDClient) => {
   const res: AssetDistributionResponse[] = await client.wasm.contractQuery(file.alliance_contract, msg)
   const vtRewardShares = res.map((info) => {
     const token = tokens.find((token) => token.denom === (info?.asset?.native ?? info?.asset?.cw20))
+    if (!token) {
+      return {
+        denom: (info?.asset?.native ?? info?.asset?.cw20),
+        tokenSymbol: (info?.asset?.native ?? info?.asset?.cw20),
+        distribution: info.distribution,
+      } as AssetDistribution
+    }
     return {
       denom: token.denom,
       tokenSymbol: token.symbol,
