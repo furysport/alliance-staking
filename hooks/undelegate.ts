@@ -1,6 +1,5 @@
 import { SigningStargateClient } from '@cosmjs/stargate'
 import file from 'public/mainnet/contract_addresses.json'
-
 import { createExecuteMessage } from 'util/createExecutionMessage'
 import { createGasFee } from 'util/createGasFees'
 
