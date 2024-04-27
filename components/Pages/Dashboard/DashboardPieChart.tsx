@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import { Box, HStack, Text, VStack } from '@chakra-ui/react'
 import { Cell, Pie, PieChart, Tooltip } from 'recharts'
 import { getColorByTokenSymbol } from 'util/getColorByTokenSymbol'
@@ -25,12 +24,10 @@ const TokenBox = ({ symbol, color }) => (
 const CustomTooltip = ({ active, payload, dashboardData }) => {
   if (active && payload && payload.length) {
     return (
-      <Box style={{ background: 'rgba(0, 0, 0, 0.75)',
-        borderRadius: 30,
-        padding: '5px 10px' }}>
+      <Box style={{ background: 'rgba(0, 0, 0, 0.75)', padding: '5px 10px' }}>
         <Text>{`${dashboardData[payload[0].name].symbol}: ${payload[0].payload.percentage}`}</Text>
       </Box>
-    );
+    )
   }
   return null
 }
@@ -62,11 +59,11 @@ export const DashboardPieChart = ({ dashboardData }) => {
       <VStack alignItems="start" alignSelf="center" w={240} paddingTop={100}>
         {data?.length > 0 && (
           <Text mt={-100}
-            mb={19}
-            as="h2"
-            fontSize="24"
-            fontWeight="900"
-            style={{ textTransform: 'capitalize' }}>Total Values Staked</Text>
+                mb={19}
+                as="h2"
+                fontSize="24"
+                fontWeight="900"
+                style={{ textTransform: 'capitalize' }}>Total Values Staked</Text>
         )}
         {data?.map((e) => (
           <VStack key={`tokenBox-${e.tokenSymbol}`} alignItems={'flex-start'}>
@@ -83,6 +80,7 @@ export const DashboardPieChart = ({ dashboardData }) => {
           outerRadius={150}
           dataKey="value"
           stroke="none"
+          fill="#8884d8"
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
