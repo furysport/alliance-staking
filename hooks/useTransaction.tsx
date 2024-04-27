@@ -7,10 +7,10 @@ import Finder from 'components/Finder';
 import { ActionType } from 'components/Pages/Dashboard';
 import { MIGALOO_CHAIN_ID, MIGALOO_CHAIN_NAME } from 'constants/common';
 import { claimRewards } from 'hooks/claimRewards';
-import { delegate } from 'hooks/delegate';
-import { undelegate } from 'hooks/undelegate';
-import { useClients } from 'hooks/useClients';
-import { TxStep } from 'types/blockchain';
+import { delegate } from 'hooks/delegate'
+import { undelegate } from 'hooks/undelegate'
+import { useClients } from 'hooks/useClients'
+import { TxStep } from 'types/blockchain'
 import { convertDenomToMicroDenom } from 'util/conversion';
 import { isNativeToken } from 'util/isNative';
 

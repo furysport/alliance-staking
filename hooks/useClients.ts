@@ -4,7 +4,7 @@ import { GeneratedType, Registry } from '@cosmjs/proto-signing';
 import { AminoTypes, SigningStargateClient } from '@cosmjs/stargate';
 import { useChain } from '@cosmos-kit/react-lite'
 import { MIGALOO_CHAIN_NAME } from 'constants/common';
-import {cosmosAminoConverters, cosmosProtoRegistry, allianceAminoConverters, allianceProtoRegistry, cosmwasmAminoConverters, cosmwasmProtoRegistry} from 'migaloojs'
+import { cosmosAminoConverters, cosmosProtoRegistry, allianceAminoConverters, allianceProtoRegistry, cosmwasmAminoConverters, cosmwasmProtoRegistry } from 'migaloojs'
 
 export const useClients = () => {
   const {
@@ -52,14 +52,14 @@ export const useClients = () => {
           ...allianceAminoConverters,
           ...cosmwasmAminoConverters,
         };
-        const registry: any  = new Registry(protoRegistry);
+        const registry: any = new Registry(protoRegistry);
         const aminoTypes = new AminoTypes(aminoConverters);
 
         const stargateClient = await SigningStargateClient.connectWithSigner(
           'https://migaloo-rpc.polkachu.com:443', offlineSigner, {
-          registry,
-          aminoTypes,
-        },
+            registry,
+            aminoTypes,
+          },
         );
         return stargateClient
       },

@@ -4,6 +4,7 @@ import file from 'public/mainnet/contract_addresses.json'
 import { createExecuteMessage } from 'util/createExecutionMessage'
 import { isNativeToken } from 'util/isNative'
 import { toBase64 } from 'util/toBase64'
+
 import { createGasFee } from '../util/createGasFees'
 
 export const delegate = async (
@@ -21,7 +22,7 @@ export const delegate = async (
       senderAddress: address,
       contractAddress: file.alliance_contract,
       message: stakeMessage,
-      funds: [coin(amount, denom)]
+      funds: [coin(amount, denom)],
     })
     return await client.signAndBroadcast(
       address, [msg], await createGasFee(
@@ -41,7 +42,7 @@ export const delegate = async (
       senderAddress: address,
       contractAddress: file.alliance_contract,
       message: msg,
-      funds: []
+      funds: [],
     })
     return await client.signAndBroadcast(
       address, [execMSG], await createGasFee(

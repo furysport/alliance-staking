@@ -62,7 +62,7 @@ const getPriceFromPool = async ({
         asset1.info.native_token?.denom || asset1.info.token?.contract_addr
       const token1 = tokens.find((token) => token.denom === (asset1.info.native_token?.denom ?? asset1.info.token?.contract_addr))
       const token2 = tokens.find((token) => token.denom === (asset2.info.native_token?.denom ?? asset2.info.token?.contract_addr))
-      const isAB = tokens.some(t => t.base && t.denom === asset1Denom)
+      const isAB = tokens.some((t) => t.base && t.denom === asset1Denom)
 
       if (!basePrice || !basedOn) {
         return 0

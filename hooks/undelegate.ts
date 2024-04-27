@@ -1,7 +1,8 @@
+import { SigningStargateClient } from '@cosmjs/stargate'
 import file from 'public/mainnet/contract_addresses.json'
-import { createExecuteMessage } from '../util/createExecutionMessage'
-import { createGasFee } from '../util/createGasFees'
-import { SigningStargateClient, coin } from '@cosmjs/stargate'
+
+import { createExecuteMessage } from 'util/createExecutionMessage'
+import { createGasFee } from 'util/createGasFees'
 
 export const undelegate = async (
   client: SigningStargateClient,
@@ -32,7 +33,7 @@ export const undelegate = async (
     senderAddress: address,
     contractAddress: file.alliance_contract,
     message: isNative ? nativeMsg : nonNativeMsg,
-    funds: []
+    funds: [],
   })
   return await client.signAndBroadcast(
     address, [execMSG], await createGasFee(
