@@ -54,8 +54,8 @@ const columns: ColumnDef<DashboardData, any>[] = [
                 Category
       </Text>
     ),
-    cell: (info) => info.getValue().charAt(0).
-      toUpperCase() + info.getValue().slice(1),
+    cell: (info) => (info.row.original.symbol === 'WHALE' ? 'Native' : info.getValue().charAt(0).
+      toUpperCase() + info.getValue().slice(1)),
   }),
   columnHelper.accessor('totalStaked', {
     enableSorting: true,
