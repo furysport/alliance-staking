@@ -54,6 +54,9 @@ const getPriceFromPool = async ({
     const prices = (await priceData.json()).data
     return prices?.[token?.coinGeckoId]?.usd ?? 1
   }
+  if (!contract){
+    return 0
+  }
   return client.wasm.
     contractQuery(contract, { pool: {} }).
     then((response: any) => {
@@ -72,13 +75,13 @@ const getPriceFromPool = async ({
           div(asset2.amount / (10 ** (token2?.decimals || 6))).
           times(basePrice[basedOn]).
           dp((10)).
-          toNumber()
+          toNumber() || 0
       } else {
-        return num(asset2.amount / (10 ** (token2?.decimals || 6))).
-          div(asset1.amount / (10 ** (token1?.decimals || 6))).
+        return num(asset2?.amount / (10 ** (token2?.decimals || 6))).
+          div(asset1?.amount / (10 ** (token1?.decimals || 6))).
           times(basePrice[basedOn]).
           dp(decimals).
-          toNumber()
+          toNumber() || 0
       }
     })
 }

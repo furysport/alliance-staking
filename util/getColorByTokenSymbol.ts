@@ -30,6 +30,12 @@ export const getColorByTokenSymbol = (symbol: string): string => {
       return 'blue'
     case Token.RAC:
         return '#009076'
+    case Token.FROG:
+      return 'green'
+    case Token.XUSK:
+      return 'purple'
+    case Token.arbWHALE:
+      return 'green'
     default:
       return 'grey'
   }

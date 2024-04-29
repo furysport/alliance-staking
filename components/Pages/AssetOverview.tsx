@@ -28,6 +28,9 @@ export enum Token {
   MOAR = 'MOAR',
   gASH = 'gASH',
   RAC = 'RAC',
+  FROG = 'FROG',
+  XUSK = 'xUSK',
+  arbWHALE = 'arbWHALE',
 }
 
 export enum TokenType {
