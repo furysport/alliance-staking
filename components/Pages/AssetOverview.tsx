@@ -31,6 +31,7 @@ export enum Token {
   FROG = 'FROG',
   XUSK = 'xUSK',
   arbWHALE = 'arbWHALE',
+  lsdSHARK = 'lsdSHARK',
 }
 
 export enum TokenType {

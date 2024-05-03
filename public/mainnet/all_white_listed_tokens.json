@@ -205,5 +205,17 @@
     "denom": "ibc/B1BD4EF49A2E051EFC85E8C6A932B559CE62F9519E0E83BE29A8F0BDF89BD1D3",
     "native": true,
     "color": "green"
+  },
+  {
+    "chainId": "migaloo-1",
+    "token_address": "factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK",
+    "symbol": "lsdSHARK",
+    "name": "lsdSHARK",
+    "decimals": 6,
+    "logoURI": "https://raw.githubusercontent.com/cosmos/chain-registry/master/migaloo/images/lsdshark.png",
+    "tags": ["native"],
+    "denom": "factory/migaloo1p3aj9f09d7c4jxhgue0hpdpw370j6gzc59nxxx6l8d0gc9f9rfwsdwetus/lsdSHARK",
+    "native": true,
+    "color": "grey"
   }
 ]
