@@ -21,7 +21,7 @@ const ClaimButton = ({ isWalletConnected, onOpenModal, totalRewards, rewardDenom
       )
     } else {
       submit(
-        ActionType.claim, null, rewardDenoms[0],
+        ActionType.claim, null, rewardDenoms,
       )
     }
   };
