@@ -1,25 +1,25 @@
 [
   {
-    "chainId": "migaloo-1",
-    "token_address": "factory/migaloo1xv4ql6t6r8zawlqn2tyxqsrvjpmjfm6kvdfvytaueqe3qvcwyr7shtx0hj/uLP",
-    "symbol": "USDC-WHALE-LP",
-    "name": "USDC-WHALE LP",
+    "chainId": "furya-1",
+    "token_address": "factory/furya1xv4ql6t6r8zawlqn2tyxqsrvjpmjfm6kvdfvytaueqe3qvcwyr7shtx0hj/uLP",
+    "symbol": "USDC-FURY-LP",
+    "name": "USDC-FURY LP",
     "decimals": 6,
     "logoURI": null,
     "tags": ["native"],
-    "denom": "factory/migaloo1xv4ql6t6r8zawlqn2tyxqsrvjpmjfm6kvdfvytaueqe3qvcwyr7shtx0hj/uLP",
+    "denom": "factory/furya1xv4ql6t6r8zawlqn2tyxqsrvjpmjfm6kvdfvytaueqe3qvcwyr7shtx0hj/uLP",
     "native": true,
     "color": "#7CFB7D"
   },
   {
-    "chainId": "migaloo-1",
-    "token_address": "factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP",
-    "symbol": "WHALE-wBTC-LP",
-    "name": "WHALE-wBTC-LP",
+    "chainId": "furya-1",
+    "token_address": "factory/furya1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP",
+    "symbol": "FURY-wBTC-LP",
+    "name": "FURY-wBTC-LP",
     "decimals": 6,
     "logoURI": null,
     "tags": ["native"],
-    "denom": "factory/migaloo1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP",
+    "denom": "factory/furya1axtz4y7jyvdkkrflknv9dcut94xr5k8m6wete4rdrw4fuptk896su44x2z/uLP",
     "native": true,
     "color": "red"
   }

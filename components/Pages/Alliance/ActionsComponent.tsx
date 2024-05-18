@@ -36,7 +36,7 @@ const ActionsComponent = ({
   globalAction,
   validatorDestAddress = null,
   validatorSrcAddress,
-  tokenSymbol = 'ampLUNA',
+  tokenSymbol = 'ampFURY',
 }: ActionsComponentProps) => {
   const { walletChainName } = useRecoilValue(chainState)
   const { address, isWalletConnected, openView } = useChain(walletChainName)

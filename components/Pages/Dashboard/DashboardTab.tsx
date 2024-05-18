@@ -6,9 +6,9 @@ import { useCalculateAllianceAprs } from 'components/Pages/Alliance/hooks/useCal
 import { Token } from 'components/Pages/AssetOverview';
 import AssetTable, { DashboardData } from 'components/Pages/Dashboard/AssetTable';
 import { DashboardPieChart } from 'components/Pages/Dashboard/DashboardPieChart';
+import { FuryBtcLogo } from 'components/Pages/Dashboard/FuryBtcLogo';
 import { useAssetsData } from 'components/Pages/Dashboard/hooks/useAssetsData';
-import { USDCWhaleLogo } from 'components/Pages/Dashboard/USDCWhaleLogo';
-import { WhaleBtcLogo } from 'components/Pages/Dashboard/WhaleBtcLogo';
+import { USDCFuryLogo } from 'components/Pages/Dashboard/USDCFuryLogo';
 import { Apr, useCalculateAprs } from 'components/Pages/Ecosystem/hooks/useCalculateAprs';
 import { useAlliances } from 'hooks/useAlliances';
 import { useGetLPTokenPrices } from 'hooks/useGetLPTokenPrices';
@@ -28,7 +28,7 @@ export const DashboardTab = ({ priceList }) => {
 
   const { vtRewardShares, totalStakedBalances } = useAssetsData()
 
-  const { data: { stakedAmpLuna, stakedBLuna, stakedWhale, stakedWBtc, stakedAmpOSMO, stakedbOsmo } } = useValidators({ address })
+  const { data: { stakedAmpFury, stakedBFury, stakedFury, stakedWBtc, stakedAmpOSMO, stakedbOsmo } } = useValidators({ address })
   const [aprs, setAprs] = useState<Apr[]>([])
   const allianceAPRs = useCalculateAllianceAprs({ address })
   const otherAprs = useCalculateAprs()
@@ -48,7 +48,7 @@ export const DashboardTab = ({ priceList }) => {
   }, [vtRewardShares, allianceAPRs, otherAprs])
 
   useEffect(() => {
-    if (!totalStakedBalances || !stakedAmpLuna || !stakedBLuna || !stakedWhale || !stakedWBtc || !stakedAmpOSMO || !stakedbOsmo || !priceList || !lpTokenPrices || aprs.length === 0) {
+    if (!totalStakedBalances || !stakedAmpFury || !stakedBFury || !stakedFury || !stakedWBtc || !stakedAmpOSMO || !stakedbOsmo || !priceList || !lpTokenPrices || aprs.length === 0) {
       return
     }
     const dashboardData = dashboardTokenSymbols.map((symbol) => {
@@ -56,14 +56,14 @@ export const DashboardTab = ({ priceList }) => {
       const totalStakedBalance = totalStakedBalances.find((balance) => balance.tokenSymbol === symbol)
       let totalAmount = 0
       switch (asset.symbol) {
-        case Token.bLUNA:
-          totalAmount = stakedBLuna
+        case Token.bFURY:
+          totalAmount = stakedBFury
           break
-        case Token.ampLUNA:
-          totalAmount = stakedAmpLuna
+        case Token.ampFURY:
+          totalAmount = stakedAmpFury
           break
-        case Token.WHALE:
-          totalAmount = stakedWhale;
+        case Token.FURY:
+          totalAmount = stakedFury;
           break
         case Token.wBTC:
           totalAmount = stakedWBtc
@@ -81,7 +81,7 @@ export const DashboardTab = ({ priceList }) => {
       const apr = aprs?.find((apr) => apr.name === symbol)
       const takeRate = allianceData?.alliances?.find((alliance) => alliance.name === symbol)?.takeRate
       return {
-        logo: symbol === 'USDC-WHALE-LP' ? <USDCWhaleLogo /> : symbol === 'WHALE-wBTC-LP' ? <WhaleBtcLogo /> :
+        logo: symbol === 'USDC-FURY-LP' ? <USDCFuryLogo /> : symbol === 'FURY-wBTC-LP' ? <FuryBtcLogo /> :
           <Image
             src={asset.logoURI}
             alt="logo-small"
@@ -100,7 +100,7 @@ export const DashboardTab = ({ priceList }) => {
     })
     setDashboardData(dashboardData)
     setInitialized(true)
-  }, [vtRewardShares, totalStakedBalances, stakedAmpLuna, stakedBLuna, stakedWhale, stakedWBtc, stakedAmpOSMO, stakedbOsmo, priceList, lpTokenPrices, aprs])
+  }, [vtRewardShares, totalStakedBalances, stakedAmpFury, stakedBFury, stakedFury, stakedWBtc, stakedAmpOSMO, stakedbOsmo, priceList, lpTokenPrices, aprs])
 
   return <VStack
     pt={12}

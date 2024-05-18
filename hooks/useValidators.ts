@@ -28,7 +28,7 @@ const getValidators = ({
   };
 
   return client?.alliance.
-    alliancesByValidators('migaloo-1').
+    alliancesByValidators('furya-1').
     then((data) => {
       const [validators = [], pagination] = validatorInfo || [];
 
@@ -68,7 +68,7 @@ const getValidators = ({
       return [[], {}];
     })
 };
-const getStakedWhale = async ({ validatorData }) => {
+const getStakedFury = async ({ validatorData }) => {
   let sum = 0
   validatorData.validators.forEach((validator) => {
     sum += Number(validator.tokens.toString());
@@ -80,9 +80,9 @@ type UseValidatorsResult = {
   data: {
     validators: ValidatorInfo[]
     pagination: any;
-    stakedWhale: number
-    stakedAmpLuna: number
-    stakedBLuna: number
+    stakedFury: number
+    stakedAmpFury: number
+    stakedBFury: number
     stakedWBtc: number
     stakedAmpOSMO: number
     stakedbOsmo: number
@@ -119,20 +119,20 @@ const getStakedbOsmo = async ({ validatorData }) => {
   return { totalbOsmoAmount }
 }
 
-const getStakedLSTLunaAmounts = async ({ validatorData }) => {
-  const bLunaDenom = allianceTokens.find((token) => token.symbol === 'bLUNA').denom
-  const ampLunaDenom = allianceTokens.find((token) => token.symbol === 'ampLUNA').denom
-  let totalAmpLunaAmount = 0
-  let totalBLunaAmount = 0
+const getStakedLSTFuryAmounts = async ({ validatorData }) => {
+  const bFuryDenom = allianceTokens.find((token) => token.symbol === 'bFURY').denom
+  const ampFuryDenom = allianceTokens.find((token) => token.symbol === 'ampFURY').denom
+  let totalAmpFuryAmount = 0
+  let totalBFuryAmount = 0
   validatorData.validators.map((v) => {
-    const bLuna = v.total_staked.find((token) => token.denom === bLunaDenom)?.amount || 0
-    const ampLuna = v.total_staked.find((token) => token.denom === ampLunaDenom)?.amount || 0
-    totalAmpLunaAmount += convertMicroDenomToDenom(ampLuna, 6)
-    totalBLunaAmount = totalAmpLunaAmount + convertMicroDenomToDenom(bLuna, 6)
+    const bFury = v.total_staked.find((token) => token.denom === bFuryDenom)?.amount || 0
+    const ampFury = v.total_staked.find((token) => token.denom === ampFuryDenom)?.amount || 0
+    totalAmpFuryAmount += convertMicroDenomToDenom(ampFury, 6)
+    totalBFuryAmount = totalAmpFuryAmount + convertMicroDenomToDenom(bFury, 6)
     return null
   })
-  return { totalAmpLunaAmount,
-    totalBLunaAmount }
+  return { totalAmpFuryAmount,
+    totalBFuryAmount }
 }
 const useValidators = ({ address }): UseValidatorsResult => {
   const client = useLCDClient();
@@ -143,7 +143,7 @@ const useValidators = ({ address }): UseValidatorsResult => {
 
   const { data: validatorInfo } = useQuery({
     queryKey: ['validatorInfo'],
-    queryFn: async () => await client?.staking.validators('migaloo-1'),
+    queryFn: async () => await client?.staking.validators('furya-1'),
     enabled: Boolean(client),
   })
 
@@ -155,14 +155,14 @@ const useValidators = ({ address }): UseValidatorsResult => {
     enabled: Boolean(client) && Boolean(validatorInfo) && Boolean(delegations),
   })
 
-  const { data: stakedWhale } = useQuery({
-    queryKey: ['stakedWhale'],
-    queryFn: () => getStakedWhale({ validatorData }),
+  const { data: stakedFury } = useQuery({
+    queryKey: ['stakedFury'],
+    queryFn: () => getStakedFury({ validatorData }),
     enabled: Boolean(validatorData),
   })
-  const { data: lunaLSTData } = useQuery({
+  const { data: furyLSTData } = useQuery({
     queryKey: ['stakedLSTs'],
-    queryFn: () => getStakedLSTLunaAmounts({ validatorData }),
+    queryFn: () => getStakedLSTFuryAmounts({ validatorData }),
     enabled: Boolean(validatorData),
   })
 
@@ -186,9 +186,9 @@ const useValidators = ({ address }): UseValidatorsResult => {
     data: {
       validators: validatorData?.validators || [],
       pagination: validatorData?.pagination || {},
-      stakedWhale: stakedWhale || 0,
-      stakedAmpLuna: lunaLSTData?.totalAmpLunaAmount || 0,
-      stakedBLuna: lunaLSTData?.totalBLunaAmount || 0,
+      stakedFury: stakedFury || 0,
+      stakedAmpFury: furyLSTData?.totalAmpFuryAmount || 0,
+      stakedBFury: furyLSTData?.totalBFuryAmount || 0,
       stakedWBtc: stakedWBtc?.totalWBtcAmount || 0,
       stakedAmpOSMO: stakedAmpOSMO?.totalampOsmoAmount || 0,
       stakedbOsmo: stakedbOsmo?.totalbOsmoAmount || 0,

@@ -16,7 +16,7 @@ export const getDelegation = async (
     return Promise.resolve([]);
   }
 
-  // This needs to be reworked such that if denom is whale we use client.distribution.rewards instead
+  // This needs to be reworked such that if denom is fury we use client.distribution.rewards instead
   const getRewards = (delegations: any) => Promise.all(delegations?.map(async (item: any) => {
     const { delegator_address: delegatorAddress, validator_address: validatorAddress, denom } = item.delegation;
 
@@ -35,7 +35,7 @@ export const getDelegation = async (
         }))
       : await client?.alliance.
         getReqFromAddress(delegatorAddress).
-        get<{ rewards?: Coins }>(`/terra/alliances/rewards/${delegatorAddress}/${validatorAddress}/${denom}`,
+        get<{ rewards?: Coins }>(`/furya/alliances/rewards/${delegatorAddress}/${validatorAddress}/${denom}`,
           {}).
         then(({ rewards }) => ({
           ...item,
@@ -72,7 +72,7 @@ export const getDelegation = async (
   return getRewards(delegations).
     then((data) => data?.map((item) => {
       const delegatedToken = tokens.find((token) => token.denom === item.delegation?.denom);
-      // If item type is native we need to return the uwhale token with 0 amount
+      // If item type is native we need to return the ufury token with 0 amount
       const rewardTokens = item.rewards.map((r) => {
         const token = tokens.find((t) => t.denom === r.denom);
         return {

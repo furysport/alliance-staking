@@ -20,7 +20,7 @@ const getUndelegations = async (
 ): Promise<any> => {
   const undelegations:Undelegation[] = []
   for (const token of tokens) {
-    let url: string = 'terra/alliances/unbondings/'
+    let url: string = 'furya/alliances/unbondings/'
     url += `/${encodeURIComponent(encodeURIComponent(token.token_address))}/${delegatorAddress}`;
     const resAlliance: any = await client.alliance.getReqFromAddress(delegatorAddress).get(url)
     if (resAlliance.unbondings.length > 0) {
@@ -38,7 +38,7 @@ const getUndelegations = async (
       })
     }
   }
-  const stakingToken = 'Whale'
+  const stakingToken = 'Fury'
   const nativeRes = await client?.staking.unbondingDelegations(delegatorAddress);
   const nativeUndelegations = nativeRes[0].map((undelegation) => {
     const undelegationJson = undelegation.toProto()
@@ -50,7 +50,7 @@ const getUndelegations = async (
       delegatorAddress: undelegation.delegator_address,
       amount,
       dollarValue,
-      symbol: 'WHALE',
+      symbol: 'FURY',
     }
   })
   // And finally merge them up and return

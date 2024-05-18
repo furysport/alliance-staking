@@ -1,5 +1,5 @@
 import { SigningStargateClient } from '@cosmjs/stargate'
-import { alliance } from 'migaloojs';
+import { alliance } from 'furyajs';
 import { createGasFee } from 'util/createGasFees'
 
 export const allianceDelegate = async (

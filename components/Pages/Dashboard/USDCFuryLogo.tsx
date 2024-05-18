@@ -1,6 +1,6 @@
 import { Box, HStack, Image } from '@chakra-ui/react'
 
-export const USDCWhaleLogo = () => <HStack spacing="0" ml={-2} mr={5}>
+export const USDCFuryLogo = () => <HStack spacing="0" ml={-2} mr={5}>
   <Box
     boxShadow="lg"
     borderRadius="full"
@@ -21,7 +21,7 @@ export const USDCWhaleLogo = () => <HStack spacing="0" ml={-2} mr={5}>
     pl={'8px'}
     zIndex={1}>
     <Image
-      src={'/logos/whale.svg'}
+      src={'/logos/fury.svg'}
       width="auto"
       maxW="1.6rem"
       maxH="1.6rem"

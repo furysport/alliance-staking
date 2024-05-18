@@ -17,18 +17,18 @@ type TokenPrice = {
 }
 
 const getLCDClient = () => new LCDClient({
-  'migaloo-1': {
-    lcd: 'https://ww-migaloo-rest.polkachu.com/',
-    chainID: 'migaloo-1',
+  'furya-1': {
+    lcd: 'https://furya.api.nodeshub.online/',
+    chainID: 'furya-1',
     gasAdjustment: 0.1,
-    gasPrices: { uwhale: 0.05 },
-    prefix: 'migaloo',
+    gasPrices: { ufury: 0.05 },
+    prefix: 'furya',
   },
   'phoenix-1': {
     lcd: 'https://ww-terra-rest.polkachu.com/',
     chainID: 'phoenix-1',
     gasAdjustment: 1.75,
-    gasPrices: { uluna: 0.015 },
+    gasPrices: { ufury: 0.015 },
     prefix: 'terra',
   },
   'osmosis-1': {

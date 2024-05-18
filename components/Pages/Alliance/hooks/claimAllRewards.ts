@@ -1,6 +1,6 @@
 import { SigningStargateClient } from '@cosmjs/stargate'
 import { ActionType } from 'components/Pages/Dashboard'
-import { alliance, cosmos } from 'migaloojs';
+import { alliance, cosmos } from 'furyajs';
 import { createGasFee } from 'util/createGasFees'
 
 export const claimAllRewards = async (
@@ -10,7 +10,7 @@ export const claimAllRewards = async (
   const claimAllianceRewards = alliance.alliance.MessageComposer.fromPartial.claimDelegationRewards
   const delegatorRewards = cosmos.distribution.v1beta1.MessageComposer.fromPartial.withdrawDelegatorReward
   const msgs = delegations.map(({ delegation }) => {
-    if (delegation.denom === 'uwhale') {
+    if (delegation.denom === 'ufury') {
       return (delegatorRewards({
         delegatorAddress: delegation.delegator_address,
         validatorAddress: delegation.validator_address,

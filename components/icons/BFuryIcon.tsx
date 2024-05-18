@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default function BLunaIcon(props) {
+export default function BFuryIcon(props) {
   return (
     <svg
       width="40"

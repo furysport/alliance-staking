@@ -113,7 +113,7 @@ const ValidatorTable = ({ selectedStatus, address }: Props) => {
       return [];
     }
     const onClick = async (action: ActionType, validatorAddress: string) => {
-      const tokenSymbol = 'ampLUNA'
+      const tokenSymbol = 'ampFURY'
       if (action === ActionType.delegate) {
         const validatorDestAddress = validatorAddress;
         await router.push({
